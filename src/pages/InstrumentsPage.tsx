@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom'
 
 const InstrumentsPage = () => {
   const [data,setData] = useState<Array<Array<string>>>()
-
+  const navigate = useNavigate()
+  
   useEffect(()=>{
     axios.get('https://prototype.sbulltech.com/api/v2/instruments').then(res=>{
       const arr:string[] = res.data.split("\n")
@@ -12,14 +13,14 @@ const InstrumentsPage = () => {
       setData(finalArray)
     })
   },[])
-  const navigate = useNavigate()
+  
   const RowClick = (id:string)=>{
     navigate(`/quotes/${id}`)
   }
-  
+
   return (
     
-      <div className='w-[90%] flex justify-center'>
+    <div className='w-[90%] flex justify-center'>
 
       <table className="table border shadow-lg">
         <thead >
