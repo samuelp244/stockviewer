@@ -20,7 +20,7 @@ const InstrumentsPage = () => {
     axios.get('https://prototype.sbulltech.com/api/v2/instruments').then(res=>{
       const arr:string[] = res.data.split("\n")
       const finalArray = arr.map(obj=>obj.split(','))
-      const temp =  finalArray.map(obj=>({symbol:obj[0],name:obj[1],sector:obj[2],validTill:obj[3]})).filter(obj=>obj.name!=='Name')
+      const temp =  finalArray.map(obj=>({symbol:obj[0],name:obj[1],sector:obj[2],validTill:obj[3]})).filter(obj=>obj.name!=='Name'&&obj.symbol!=="")
       setData(temp.sort((a,b)=>{
         if(a.symbol>b.symbol) return 1;
         else if(a.symbol<b.symbol) return -1;
@@ -29,8 +29,10 @@ const InstrumentsPage = () => {
     })
   },[])
   
-  const RowClick = (id:string)=> navigate(`/quotes/${id}`)
-
+  const RowClick = (id:string)=>{
+    navigate(`/quotes/${id}`)
+    console.log(id)
+  }
 
   return (
     <div className='w-[90%] flex flex-col justify-center'>

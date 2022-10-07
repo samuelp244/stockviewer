@@ -13,7 +13,7 @@ const Quotes = () => {
   const {symbol} = useParams()
   const [stockData,setStockData] = useState<stockDataType[]>()
   const [order,setOrder] = useState("ASC")
-  const [refreshTime,setRefreshTime] = useState<number>()
+  const [refreshTime,setRefreshTime] = useState<number>(1000000)
 
   const navigate = useNavigate()
 
