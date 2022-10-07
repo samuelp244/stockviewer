@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router,Routes,Route, Navigate, Link} from "react-router-dom"
+import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
 import InstrumentsPage from './pages/InstrumentsPage';
 import Quotes from './pages/Quotes';
 function App() {
