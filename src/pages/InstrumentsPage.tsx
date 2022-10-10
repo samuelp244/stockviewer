@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import {IoSearchSharp} from 'react-icons/io5'
 
 interface dataType{
   name:string ,
@@ -31,46 +32,58 @@ const InstrumentsPage = () => {
   
   const RowClick = (id:string)=>{
     navigate(`/quotes/${id}`)
-    console.log(id)
+    // console.log(id)
   }
 
   return (
-    <div className='w-[90%] flex flex-col justify-center'>
-      <input className='' placeholder='search' onChange={(e)=>setSearchTerm(e.target.value)}/>
-      <table className="table border shadow-lg">
-        <thead >
-          <tr className=' shadow-md'>
-            <th scope="col" className=' font-semibold text-sm'>Symbol</th>
-            <th scope="col" className=' font-semibold text-sm'>Name</th>
-            <th scope="col" className=' font-semibold text-sm'>Sector</th>
-            <th scope="col" className=' font-semibold text-sm'>Validtill</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            data?.filter(val=>{
-              if(searchTerm===""){
-                return val
-              }else if (val.symbol?.toLowerCase().includes(searchTerm.toLowerCase())||
-                        val.name?.toLowerCase().includes(searchTerm.toLowerCase())||
-                        val.sector?.toLowerCase().includes(searchTerm.toLowerCase())||
-                        val.validTill?.toLowerCase().includes(searchTerm.toLowerCase())){
-                return val
-              }
-              return null
-            }).map(i=>{
-              return(
-                <tr  key={i.symbol} onClick={()=>RowClick(i.symbol)} className='hover:bg-slate-100 text-sm'>
-                  <th scope="row" >{i.symbol}</th>
-                  <td>{i.name}</td>
-                  <td>{i.sector}</td>
-                  <td>{i.validTill}</td>
-                </tr>
-              )
-            })
-          }
-        </tbody>
-      </table>
+    <div className='w-[90%] flex flex-col gap-3 justify-center shadow rounded p-2 pt-3 bg-white'>
+        <div className='flex justify-end'>
+          <div className='flex border border-black w-72 rounded'>
+            <input className=' w-full p-1 px-2 rounded focus:outline-none' placeholder='search' onChange={(e)=>setSearchTerm(e.target.value)}/>
+            <span className='my-auto px-3'><IoSearchSharp/></span>
+          </div>
+        </div>
+        
+        <div className='rounded  '>
+          <table className="table shadow-md mb-0 ">
+            <thead className=''>
+              <tr className=''>
+                <th scope="col" className=' text-xs py-auto font-medium text-gray-500 w-1/4'>Symbol</th>
+                <th scope="col" className=' text-xs py-auto font-medium text-gray-500 w-1/4'>Name</th>
+                <th scope="col" className=' text-xs py-auto font-medium text-gray-500 w-1/4'>Sector</th>
+                <th scope="col" className=' text-xs py-auto font-medium text-gray-500 w-1/4'>Validtill</th>
+              </tr>
+            </thead>
+          </table>
+          <div className='overflow-auto h-[20.5rem]'>
+            <table className='table'>
+              <tbody >
+                {
+                  data?.filter(val=>{
+                    if(searchTerm===""){
+                      return val
+                    }else if (val.symbol?.toLowerCase().includes(searchTerm.toLowerCase())||
+                              val.name?.toLowerCase().includes(searchTerm.toLowerCase())||
+                              val.sector?.toLowerCase().includes(searchTerm.toLowerCase())||
+                              val.validTill?.toLowerCase().includes(searchTerm.toLowerCase())){
+                      return val
+                    }
+                    return null
+                  }).map(i=>{
+                    return(
+                      <tr key={i.symbol} onClick={()=>RowClick(i.symbol)} className='hover:bg-gray-100'>
+                        <th scope="row" className='w-1/4 text-sm'>{i.symbol}</th>
+                        <td className='w-1/4 text-sm'>{i.name}</td>
+                        <td className='w-1/4 text-sm'>{i.sector}</td>
+                        <td className='w-1/4 text-sm'>{i.validTill}</td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
     </div>
   )
 }

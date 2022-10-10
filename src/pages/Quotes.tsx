@@ -59,28 +59,27 @@ const Quotes = () => {
   }
 
   return (
-  <div className='w-[90%] flex flex-col justify-center'>
-    <div className='flex justify-start'><p>Stock Symbol: {symbol}</p></div>
-    <table className="table border shadow-lg">
-      <thead >
+  <div className='w-[90%] flex flex-col justify-center shadow rounded p-2 bg-white'>
+    <div className='flex justify-start p-2'><p>{symbol}</p></div>
+    <table className="table mb-0">
+      <thead>
         <tr className=' shadow-md'>
-          <th scope="col" className=' font-semibold text-sm hover:bg-slate-100'>price</th>
-          <th scope="col" className=' font-semibold text-sm flex justify-between hover:bg-slate-100' onClick={()=>Sorting()}>
-            <span>time</span>
+          <th scope="col" className=' font-medium text-xs text-gray-500 hover:bg-slate-100'>Price</th>
+          <th scope="col" className=' font-medium text-xs text-gray-500 flex justify-between hover:bg-slate-100' onClick={()=>Sorting()}>
+            <span>Time</span>
             <span className='my-auto'>{order==="ASC"?<TbSortAscending/>:<TbSortDescending/>}</span>
           </th>
-          <th scope="col" className=' font-semibold text-sm hover:bg-slate-100'>Validtill</th>
+          <th scope="col" className=' font-medium text-xs text-gray-500 hover:bg-gray-100'>Validtill</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody >
         {
           stockData?.map(i=>{
-            
             return(
-              <tr  key={i.price} className='hover:bg-slate-100 text-sm'>
-                <td>{i.price.toFixed(3)}</td>
-                <td>{i.time}</td>
-                <td>{i.valid_till}</td>
+              <tr  key={i.price} className='hover:bg-gray-100 text-sm'>
+                <td className='w-1/3 text-sm'>{i.price.toFixed(3)}</td>
+                <td className='w-1/3 text-sm'>{i.time}</td>
+                <td className='w-1/4 text-sm'>{i.valid_till}</td>
               </tr>
             )
           })
