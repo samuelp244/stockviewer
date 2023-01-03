@@ -18,7 +18,7 @@ const InstrumentsPage = () => {
   const navigate = useNavigate()
 
   useEffect(()=>{
-    axios.get('https://prototype.sbulltech.com/api/v2/instruments').then(res=>{
+    axios.get(`${process.env.REACT_APP_BASE_URL}/api/v2/instruments`).then(res=>{
       const arr:string[] = res.data.split("\n")
       const finalArray = arr.map(obj=>obj.split(','))
       const temp =  finalArray.map(obj=>({symbol:obj[0],name:obj[1],sector:obj[2],validTill:obj[3]})).filter(obj=>obj.name!=='Name'&&obj.symbol!=="")

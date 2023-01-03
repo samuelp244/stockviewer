@@ -19,7 +19,7 @@ const Quotes = () => {
 
   useEffect(()=>{
     if(symbol!==undefined){
-        axios.get(`https://prototype.sbulltech.com/api/v2/quotes/${symbol}`).then(res=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/v2/quotes/${symbol}`).then(res=>{
           if(res.data.success===false){
             navigate('/')
           }else{
@@ -35,6 +35,7 @@ const Quotes = () => {
           }
         })
     }
+    
   },[symbol,navigate])
 
   setTimeout(()=>{
